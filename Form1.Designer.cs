@@ -170,9 +170,9 @@
             this.CajaPuntos.AutoSize = true;
             this.CajaPuntos.Location = new System.Drawing.Point(330, 80);
             this.CajaPuntos.Name = "CajaPuntos";
-            this.CajaPuntos.Size = new System.Drawing.Size(44, 16);
+            this.CajaPuntos.Size = new System.Drawing.Size(165, 20);
             this.CajaPuntos.TabIndex = 1;
-            this.CajaPuntos.Text = "label1";
+            this.CajaPuntos.Text = "CAJA PARA AHORA";
             // 
             // CajaTiempo
             // 
