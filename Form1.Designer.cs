@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.LabelOperacion = new System.Windows.Forms.Label();
-            this.CajaPuntos = new System.Windows.Forms.Label();
+            this.lblPoint = new System.Windows.Forms.Label();
             this.CajaTiempo = new System.Windows.Forms.Label();
             this.DiseñoMapa = new System.Windows.Forms.Panel();
             this.pictureBox51 = new System.Windows.Forms.PictureBox();
@@ -92,6 +92,7 @@
             this.Respuesta3 = new System.Windows.Forms.PictureBox();
             this.Respuesta4 = new System.Windows.Forms.PictureBox();
             this.Respuesta1 = new System.Windows.Forms.PictureBox();
+            this.btnEnd = new System.Windows.Forms.Button();
             this.DiseñoMapa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox51)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox50)).BeginInit();
@@ -165,14 +166,15 @@
             this.LabelOperacion.Text = "Caja para las operaciones";
             this.LabelOperacion.Click += new System.EventHandler(this.CajaOperaciones_Click);
             // 
-            // CajaPuntos
+            // lblPoint
             // 
-            this.CajaPuntos.AutoSize = true;
-            this.CajaPuntos.Location = new System.Drawing.Point(330, 80);
-            this.CajaPuntos.Name = "CajaPuntos";
-            this.CajaPuntos.Size = new System.Drawing.Size(165, 20);
-            this.CajaPuntos.TabIndex = 1;
-            this.CajaPuntos.Text = "CAJA PARA AHORA";
+            this.lblPoint.AutoSize = true;
+            this.lblPoint.Location = new System.Drawing.Point(330, 80);
+            this.lblPoint.Name = "lblPoint";
+            this.lblPoint.Size = new System.Drawing.Size(10, 16);
+            this.lblPoint.TabIndex = 1;
+            this.lblPoint.Text = ".";
+            this.lblPoint.Click += new System.EventHandler(this.CajaPuntos_Click_1);
             // 
             // CajaTiempo
             // 
@@ -182,6 +184,7 @@
             this.CajaTiempo.Size = new System.Drawing.Size(121, 16);
             this.CajaTiempo.TabIndex = 2;
             this.CajaTiempo.Text = "caja para las vidas";
+            this.CajaTiempo.Click += new System.EventHandler(this.CajaTiempo_Click);
             // 
             // DiseñoMapa
             // 
@@ -847,14 +850,25 @@
             this.Respuesta1.TabIndex = 5;
             this.Respuesta1.TabStop = false;
             // 
+            // btnEnd
+            // 
+            this.btnEnd.Location = new System.Drawing.Point(73, 51);
+            this.btnEnd.Name = "btnEnd";
+            this.btnEnd.Size = new System.Drawing.Size(150, 45);
+            this.btnEnd.TabIndex = 4;
+            this.btnEnd.Text = "FINALIZAR PRUEBA";
+            this.btnEnd.UseVisualStyleBackColor = true;
+            this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1191, 785);
+            this.Controls.Add(this.btnEnd);
             this.Controls.Add(this.DiseñoMapa);
             this.Controls.Add(this.CajaTiempo);
-            this.Controls.Add(this.CajaPuntos);
+            this.Controls.Add(this.lblPoint);
             this.Controls.Add(this.LabelOperacion);
             this.KeyPreview = true;
             this.Name = "Form1";
@@ -930,7 +944,7 @@
         #endregion
 
         private System.Windows.Forms.Label LabelOperacion;
-        private System.Windows.Forms.Label CajaPuntos;
+        private System.Windows.Forms.Label lblPoint;
         private System.Windows.Forms.Label CajaTiempo;
         private System.Windows.Forms.Panel DiseñoMapa;
         private System.Windows.Forms.PictureBox Respuesta5;
@@ -993,6 +1007,7 @@
         private System.Windows.Forms.PictureBox pictureBox44;
         private System.Windows.Forms.PictureBox pictureBox51;
         private System.Windows.Forms.PictureBox pictureBox50;
+        private System.Windows.Forms.Button btnEnd;
     }
 }
 

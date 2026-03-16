@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-
+using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,7 +15,13 @@ namespace JuegoMatematico
     public partial class Form1 : Form
     {
         Random rnd = new Random();
-        int respuestaCorrecta;
+        private int respuestaCorrecta =  0;
+        private string nombreJugador;
+        public Form1(string nombre)
+        {
+            nombreJugador = nombre;
+            InitializeComponent();
+        }
 
         public Form1()
         {
@@ -149,6 +155,7 @@ namespace JuegoMatematico
 
             if (valor == respuestaCorrecta)
             {
+                respuestaCorrecta++;
                 MessageBox.Show("Respuesta Correcta");
             }
             else
@@ -198,11 +205,61 @@ namespace JuegoMatematico
             caja.Controls.Add(numero);
         }
 
+        private void GuardarPartida()
+        {
+            string connectionString = "Server=localhost;Database=JuegoMatematico;Trusted_Connection=True;TrustServerCertificate=True;";
+
+            string query = "INSERT INTO Partida (PlayerName, RespuestaCorrectas) VALUES (@nombreJugador, @respuestasCorrectas)";
+
+            using (SqlConnection conexion = new SqlConnection(connectionString))
+            {
+                using (SqlCommand comando = new SqlCommand(query, conexion))
+                {
+                    comando.Parameters.AddWithValue("@nombreJugador", nombreJugador);
+                    comando.Parameters.AddWithValue("@respuestasCorrectas", respuestaCorrecta);
+
+                    conexion.Open();
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void FinalizarJuego()
+        {
+            try
+            {
+                GuardarPartida();
+
+                MessageBox.Show(
+                    "Juego terminado.\n" +
+                    "Jugador: " + nombreJugador + "\n" +
+                    "Respuestas correctas: " + respuestaCorrecta,
+                    "Partida guardada",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Ocurrió un error al guardar la partida:\n" + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+    
 
 
 
 
-        private void DiseñoMapa_Paint(object sender, PaintEventArgs e)
+
+
+
+private void DiseñoMapa_Paint(object sender, PaintEventArgs e)
         {
            
         }
@@ -225,6 +282,21 @@ namespace JuegoMatematico
         private void CajaPuntos_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void CajaTiempo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CajaPuntos_Click_1(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btnEnd_Click(object sender, EventArgs e)
+        {
+            FinalizarJuego()
         }
     }
 }
