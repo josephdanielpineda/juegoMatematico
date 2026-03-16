@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-
+using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,9 +21,11 @@ namespace JuegoMatematico
         int totalEjercicios = 5;
         int ejerciciosRestantes = 5;
         int TotalEjercicios = 5;
-        public Form1()
+        private string nombreJugador;
+       
+        public Form1(string nombre)
         {
-            
+            nombreJugador = nombre;
             InitializeComponent();
         }
 
@@ -192,20 +194,35 @@ namespace JuegoMatematico
 
         private void FinDelJuego()
         {
-            DialogResult resultado = MessageBox.Show(
-                "Juego terminado\n\nPuntaje final: " + puntaje +
-                "\n\n¿Quieres jugar otra vez?",
-                "Fin del juego",
-                MessageBoxButtons.YesNo
-            );
+            try
+            {
+                GuardarPartida();
 
-            if (resultado == DialogResult.Yes)
-            {
-                ReiniciarJuego();
+                DialogResult resultado = MessageBox.Show(
+                    "Juego terminado\n\nJugador: " + nombreJugador +
+                    "\nPuntaje final: " + puntaje +
+                    "\n\n¿Quieres jugar otra vez?",
+                    "Fin del juego",
+                    MessageBoxButtons.YesNo
+                );
+
+                if (resultado == DialogResult.Yes)
+                {
+                    ReiniciarJuego();
+                }
+                else
+                {
+                    Application.Exit();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Application.Exit();
+                MessageBox.Show(
+                    "Ocurrió un error al guardar la partida:\n" + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
 
@@ -259,6 +276,28 @@ namespace JuegoMatematico
             caja.Controls.Add(numero);
         }
 
+        private void GuardarPartida() // Guardar el nombre del jugador y el puntaje en la base de datos
+
+        {
+
+            string connectionString = "Server=localhost\\SQLEXPRESS;Database=JuegoMatematico;Trusted_Connection=True;TrustServerCertificate=True;";
+
+            string query = "INSERT INTO dbo.Partida (PlayerName, Puntaje) VALUES (@PlayerName, @Puntaje)";
+
+            
+            using (SqlConnection conexion = new SqlConnection(connectionString))
+            {
+                using (SqlCommand comando = new SqlCommand(query, conexion))
+                {
+                    comando.Parameters.AddWithValue("@PlayerName", nombreJugador);
+                    comando.Parameters.AddWithValue("@Puntaje", puntaje);
+
+                    conexion.Open();
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
+
 
 
 
@@ -286,6 +325,37 @@ namespace JuegoMatematico
         private void CajaPuntos_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Respuesta5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnGuardarPrueba_Click(object sender, EventArgs e)
+        {
+             try
+    {
+        GuardarPartida();
+
+        MessageBox.Show(
+            "Datos guardados correctamente.\n" +
+            "Jugador: " + nombreJugador + "\n" +
+            "Puntaje actual: " + puntaje,
+            "Prueba de guardado",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information
+        );
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show(
+            "Error al guardar:\n" + ex.Message,
+            "Error",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Error
+        );
+    }
         }
     }
 }

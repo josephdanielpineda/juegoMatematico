@@ -17,12 +17,7 @@ namespace JuegoMatematico
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnStart_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             string nombreJugador = txtname.Text.Trim();
 
@@ -38,10 +33,7 @@ namespace JuegoMatematico
 
             Form1 juego = new Form1(nombreJugador);
             juego.Show();
-
             this.Hide();
         }
     }
 }
-
-

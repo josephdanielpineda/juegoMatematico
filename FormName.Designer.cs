@@ -28,46 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnStart = new System.Windows.Forms.Button();
-            this.lblName = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtname = new System.Windows.Forms.TextBox();
+            this.btnStart = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnStart
+            // label1
             // 
-            this.btnStart.Location = new System.Drawing.Point(346, 215);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(111, 39);
-            this.btnStart.TabIndex = 0;
-            this.btnStart.Text = "START";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // lblName
-            // 
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(361, 93);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(96, 16);
-            this.lblName.TabIndex = 1;
-            this.lblName.Text = "Pon tu Nombre";
-            this.lblName.Click += new System.EventHandler(this.label1_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(256, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(230, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Las flipantes operaciones Aritmeticas";
             // 
             // txtname
             // 
-            this.txtname.Location = new System.Drawing.Point(314, 158);
+            this.txtname.Location = new System.Drawing.Point(228, 129);
             this.txtname.Name = "txtname";
-            this.txtname.Size = new System.Drawing.Size(187, 22);
-            this.txtname.TabIndex = 2;
+            this.txtname.Size = new System.Drawing.Size(269, 22);
+            this.txtname.TabIndex = 1;
+            // 
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(316, 202);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(101, 36);
+            this.btnStart.TabIndex = 2;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormName
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.txtname);
-            this.Controls.Add(this.lblName);
             this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.txtname);
+            this.Controls.Add(this.label1);
             this.Name = "FormName";
             this.Text = "FormName";
             this.ResumeLayout(false);
@@ -77,8 +76,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtname;
+        private System.Windows.Forms.Button btnStart;
     }
 }
