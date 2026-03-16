@@ -1,12 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace JuegoMatematico
 {
@@ -28,11 +30,11 @@ namespace JuegoMatematico
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            GenerarOperacion();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
+        {//configuracion para movimineot del jugador en este caso con W,A,S,D
             int velocidad = 10;
 
             if (e.KeyCode == Keys.W)
@@ -58,6 +60,8 @@ namespace JuegoMatematico
                 Jugador.Left += velocidad;
                 if (ColisionMuro()) Jugador.Left -= velocidad;
             }
+            DetectarRespuestas();
+            
         }
 
 
@@ -89,7 +93,7 @@ namespace JuegoMatematico
         }
 
         private void GenerarOperacion()
-        {
+        {//metodo para que a traves del LabelOperacion se muestre la operacion a realizar 
             int a = rnd.Next(1, 10);
             int b = rnd.Next(1, 10);
 
@@ -118,9 +122,84 @@ namespace JuegoMatematico
                     respuestaCorrecta = a / b;
                     break;
             }
-
+            GenerarRespuestas();
            
         }
+
+        private void DetectarRespuestas()
+        {
+            //itilizamos if para que las respuestas tengan inteccion con el jugador 
+            if (Jugador.Bounds.IntersectsWith(Respuesta1.Bounds))
+                VerificarRespuesta(Respuesta1);
+
+            if (Jugador.Bounds.IntersectsWith(Respuesta2.Bounds))
+                VerificarRespuesta(Respuesta2);
+
+            if (Jugador.Bounds.IntersectsWith(Respuesta3.Bounds))
+                VerificarRespuesta(Respuesta3);
+
+            if (Jugador.Bounds.IntersectsWith(Respuesta4.Bounds))
+                VerificarRespuesta(Respuesta4);
+        }
+
+
+        private void VerificarRespuesta(PictureBox respuesta)
+        {// para comprobar si las respuestas son verdaderas o falsas 
+            int valor = Convert.ToInt32(respuesta.Tag);
+
+            if (valor == respuestaCorrecta)
+            {
+                MessageBox.Show("Respuesta Correcta");
+            }
+            else
+            {
+                MessageBox.Show("Respuesta Incorrecta");
+            }
+
+            GenerarOperacion();
+            GenerarRespuestas();
+        }
+
+
+        private void GenerarRespuestas()
+        {
+            int r1 = respuestaCorrecta;
+            int r2 = respuestaCorrecta + rnd.Next(1, 5);
+            int r3 = respuestaCorrecta - rnd.Next(1, 5);
+            int r4 = respuestaCorrecta + rnd.Next(2, 6);
+
+            List<int> respuestas = new List<int>() { r1, r2, r3, r4 };
+
+            respuestas = respuestas.OrderBy(x => rnd.Next()).ToList();
+
+            Respuesta1.Tag = respuestas[0];
+            Respuesta2.Tag = respuestas[1];
+            Respuesta3.Tag = respuestas[2];
+            Respuesta4.Tag = respuestas[3];
+
+            MostrarNumero(Respuesta1);
+            MostrarNumero(Respuesta2);
+            MostrarNumero(Respuesta3);
+            MostrarNumero(Respuesta4);
+        }
+
+        private void MostrarNumero(PictureBox caja)
+        {
+            caja.Controls.Clear();
+
+            Label numero = new Label();
+
+            numero.Text = caja.Tag.ToString();
+            numero.Dock = DockStyle.Fill;
+            numero.TextAlign = ContentAlignment.MiddleCenter;
+            numero.BackColor = Color.Transparent;
+            numero.Font = new Font("Arial", 18, FontStyle.Bold);
+
+            caja.Controls.Add(numero);
+        }
+
+
+
 
 
         private void DiseñoMapa_Paint(object sender, PaintEventArgs e)
@@ -134,6 +213,16 @@ namespace JuegoMatematico
         }
 
         private void pictureBox48_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CajaPuntos_Click(object sender, EventArgs e)
         {
 
         }
