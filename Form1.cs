@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Data.SqlClient;
+
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,14 +15,12 @@ namespace JuegoMatematico
     public partial class Form1 : Form
     {
         Random rnd = new Random();
-        private int respuestaCorrecta =  0;
-        private string nombreJugador;
-        public Form1(string nombre)
-        {
-            nombreJugador = nombre;
-            InitializeComponent();
-        }
-
+        int respuestaCorrecta;
+        int puntaje = 0;
+        int ejerciciosRealizados = 0;
+        int totalEjercicios = 5;
+        int ejerciciosRestantes = 5;
+        int TotalEjercicios = 5;
         public Form1()
         {
             
@@ -37,6 +35,7 @@ namespace JuegoMatematico
         private void Form1_Load(object sender, EventArgs e)
         {
             GenerarOperacion();
+           
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -99,42 +98,50 @@ namespace JuegoMatematico
         }
 
         private void GenerarOperacion()
-        {//metodo para que a traves del LabelOperacion se muestre la operacion a realizar 
-            int a = rnd.Next(1, 10);
-            int b = rnd.Next(1, 10);
+        {
+            int num1;
+            int num2;
+            int operador = rnd.Next(1, 5); // 1=suma, 2=resta, 3=multiplicacion, 4=division
 
-            int tipoOperacion = rnd.Next(1, 5);
-
-            switch (tipoOperacion)
+            switch (operador)
             {
-                case 1:
-                    LabelOperacion.Text = a + " + " + b;
-                    respuestaCorrecta = a + b;
+                case 1: // SUMA
+                    num1 = rnd.Next(1, 20);
+                    num2 = rnd.Next(1, 20);
+                    respuestaCorrecta = num1 + num2;
+                    LabelOperacion.Text = num1 + " + " + num2;
                     break;
 
-                case 2:
-                    LabelOperacion.Text = a + " - " + b;
-                    respuestaCorrecta = a - b;
+                case 2: // RESTA
+                    num1 = rnd.Next(1, 20);
+                    num2 = rnd.Next(1, 20);
+                    respuestaCorrecta = num1 - num2;
+                    LabelOperacion.Text = num1 + " - " + num2;
                     break;
 
-                case 3:
-                    LabelOperacion.Text = a + " × " + b;
-                    respuestaCorrecta = a * b;
+                case 3: // MULTIPLICACION
+                    num1 = rnd.Next(1, 12);
+                    num2 = rnd.Next(1, 12);
+                    respuestaCorrecta = num1 * num2;
+                    LabelOperacion.Text = num1 + " × " + num2;
                     break;
 
-                case 4:
-                    a = a * b;
-                    LabelOperacion.Text = a + " ÷ " + b;
-                    respuestaCorrecta = a / b;
+                case 4: // DIVISION SIN DECIMALES
+                    num2 = rnd.Next(1, 12);
+                    respuestaCorrecta = rnd.Next(1, 12);
+                    num1 = num2 * respuestaCorrecta; // garantiza división exacta
+                    LabelOperacion.Text = num1 + " ÷ " + num2;
                     break;
             }
             GenerarRespuestas();
-           
         }
+        
+           
+        
 
         private void DetectarRespuestas()
         {
-            //itilizamos if para que las respuestas tengan inteccion con el jugador 
+            //utilizamos if para que las respuestas tengan inteccion con el jugador 
             if (Jugador.Bounds.IntersectsWith(Respuesta1.Bounds))
                 VerificarRespuesta(Respuesta1);
 
@@ -146,27 +153,72 @@ namespace JuegoMatematico
 
             if (Jugador.Bounds.IntersectsWith(Respuesta4.Bounds))
                 VerificarRespuesta(Respuesta4);
+
+            if (Jugador.Bounds.IntersectsWith(Respuesta5.Bounds))
+                VerificarRespuesta(Respuesta5);
         }
 
 
         private void VerificarRespuesta(PictureBox respuesta)
-        {// para comprobar si las respuestas son verdaderas o falsas 
+        {
             int valor = Convert.ToInt32(respuesta.Tag);
 
             if (valor == respuestaCorrecta)
             {
-                respuestaCorrecta++;
                 MessageBox.Show("Respuesta Correcta");
+                puntaje += 10;
             }
             else
             {
                 MessageBox.Show("Respuesta Incorrecta");
+                puntaje -= 5;
+            }
+
+            LabelPuntaje.Text = "Puntaje: " + puntaje;
+
+            ejerciciosRestantes--;
+
+            TotalEjercicio.Text = ejerciciosRestantes.ToString();
+
+            if (ejerciciosRestantes == 0)
+            {
+                FinDelJuego();
+                return;
             }
 
             GenerarOperacion();
-            GenerarRespuestas();
         }
 
+
+        private void FinDelJuego()
+        {
+            DialogResult resultado = MessageBox.Show(
+                "Juego terminado\n\nPuntaje final: " + puntaje +
+                "\n\n¿Quieres jugar otra vez?",
+                "Fin del juego",
+                MessageBoxButtons.YesNo
+            );
+
+            if (resultado == DialogResult.Yes)
+            {
+                ReiniciarJuego();
+            }
+            else
+            {
+                Application.Exit();
+            }
+        }
+
+        private void ReiniciarJuego()
+        {
+            puntaje = 0;
+            ejerciciosRestantes = totalEjercicios;
+
+            LabelPuntaje.Text = "Puntaje: 0";
+            TotalEjercicio.Text = ejerciciosRestantes.ToString();
+
+            GenerarOperacion();
+        }
 
         private void GenerarRespuestas()
         {
@@ -174,8 +226,8 @@ namespace JuegoMatematico
             int r2 = respuestaCorrecta + rnd.Next(1, 5);
             int r3 = respuestaCorrecta - rnd.Next(1, 5);
             int r4 = respuestaCorrecta + rnd.Next(2, 6);
-
-            List<int> respuestas = new List<int>() { r1, r2, r3, r4 };
+            int r5 = respuestaCorrecta + rnd.Next(2, 6);
+            List<int> respuestas = new List<int>() { r1, r2, r3, r4,r5 };
 
             respuestas = respuestas.OrderBy(x => rnd.Next()).ToList();
 
@@ -183,11 +235,13 @@ namespace JuegoMatematico
             Respuesta2.Tag = respuestas[1];
             Respuesta3.Tag = respuestas[2];
             Respuesta4.Tag = respuestas[3];
+            Respuesta5.Tag = respuestas[4];
 
             MostrarNumero(Respuesta1);
             MostrarNumero(Respuesta2);
             MostrarNumero(Respuesta3);
             MostrarNumero(Respuesta4);
+            MostrarNumero(Respuesta5);
         }
 
         private void MostrarNumero(PictureBox caja)
@@ -205,61 +259,11 @@ namespace JuegoMatematico
             caja.Controls.Add(numero);
         }
 
-        private void GuardarPartida()
-        {
-            string connectionString = "Server=localhost;Database=JuegoMatematico;Trusted_Connection=True;TrustServerCertificate=True;";
-
-            string query = "INSERT INTO Partida (PlayerName, RespuestaCorrectas) VALUES (@nombreJugador, @respuestasCorrectas)";
-
-            using (SqlConnection conexion = new SqlConnection(connectionString))
-            {
-                using (SqlCommand comando = new SqlCommand(query, conexion))
-                {
-                    comando.Parameters.AddWithValue("@nombreJugador", nombreJugador);
-                    comando.Parameters.AddWithValue("@respuestasCorrectas", respuestaCorrecta);
-
-                    conexion.Open();
-                    comando.ExecuteNonQuery();
-                }
-            }
-        }
-
-        private void FinalizarJuego()
-        {
-            try
-            {
-                GuardarPartida();
-
-                MessageBox.Show(
-                    "Juego terminado.\n" +
-                    "Jugador: " + nombreJugador + "\n" +
-                    "Respuestas correctas: " + respuestaCorrecta,
-                    "Partida guardada",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
-
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "Ocurrió un error al guardar la partida:\n" + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-            }
-        }
-    
 
 
 
 
-
-
-
-private void DiseñoMapa_Paint(object sender, PaintEventArgs e)
+        private void DiseñoMapa_Paint(object sender, PaintEventArgs e)
         {
            
         }
@@ -282,21 +286,6 @@ private void DiseñoMapa_Paint(object sender, PaintEventArgs e)
         private void CajaPuntos_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void CajaTiempo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CajaPuntos_Click_1(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void btnEnd_Click(object sender, EventArgs e)
-        {
-            FinalizarJuego()
         }
     }
 }
