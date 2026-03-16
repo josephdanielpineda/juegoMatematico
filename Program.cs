@@ -16,7 +16,7 @@ namespace JuegoMatematico
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormName());
+            Application.Run(new Form1());
         }
     }
 }
