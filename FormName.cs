@@ -35,5 +35,11 @@ namespace JuegoMatematico
             juego.Show();
             this.Hide();
         }
+
+        private void btnRank_Click(object sender, EventArgs e)
+        {
+            FormRanking ranking = new FormRanking();
+            ranking.ShowDialog();
+        }
     }
 }

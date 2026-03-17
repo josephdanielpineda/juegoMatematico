@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtname = new System.Windows.Forms.TextBox();
             this.btnStart = new System.Windows.Forms.Button();
+            this.btnRank = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -59,11 +60,22 @@
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnRank
+            // 
+            this.btnRank.Location = new System.Drawing.Point(239, 270);
+            this.btnRank.Name = "btnRank";
+            this.btnRank.Size = new System.Drawing.Size(258, 52);
+            this.btnRank.TabIndex = 3;
+            this.btnRank.Text = "Ver Ranking";
+            this.btnRank.UseVisualStyleBackColor = true;
+            this.btnRank.Click += new System.EventHandler(this.btnRank_Click);
+            // 
             // FormName
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnRank);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.txtname);
             this.Controls.Add(this.label1);
@@ -79,5 +91,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtname;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnRank;
     }
 }

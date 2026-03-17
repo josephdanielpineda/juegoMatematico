@@ -92,7 +92,6 @@
             this.Respuesta3 = new System.Windows.Forms.PictureBox();
             this.Respuesta4 = new System.Windows.Forms.PictureBox();
             this.Respuesta1 = new System.Windows.Forms.PictureBox();
-            this.btnGuardarPrueba = new System.Windows.Forms.Button();
             this.DiseñoMapa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Respuesta5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox51)).BeginInit();
@@ -859,22 +858,11 @@
             this.Respuesta1.TabIndex = 5;
             this.Respuesta1.TabStop = false;
             // 
-            // btnGuardarPrueba
-            // 
-            this.btnGuardarPrueba.Location = new System.Drawing.Point(960, 200);
-            this.btnGuardarPrueba.Name = "btnGuardarPrueba";
-            this.btnGuardarPrueba.Size = new System.Drawing.Size(219, 89);
-            this.btnGuardarPrueba.TabIndex = 4;
-            this.btnGuardarPrueba.Text = "Prueba de Guardado";
-            this.btnGuardarPrueba.UseVisualStyleBackColor = true;
-            this.btnGuardarPrueba.Click += new System.EventHandler(this.btnGuardarPrueba_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1191, 785);
-            this.Controls.Add(this.btnGuardarPrueba);
             this.Controls.Add(this.DiseñoMapa);
             this.KeyPreview = true;
             this.Name = "Form1";
@@ -1013,7 +1001,6 @@
         private System.Windows.Forms.PictureBox pictureBox51;
         private System.Windows.Forms.PictureBox pictureBox50;
         private System.Windows.Forms.PictureBox Respuesta5;
-        private System.Windows.Forms.Button btnGuardarPrueba;
     }
 }
 
