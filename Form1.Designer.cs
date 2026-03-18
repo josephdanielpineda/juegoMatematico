@@ -266,7 +266,7 @@
             this.Respuesta5.BackColor = System.Drawing.Color.LawnGreen;
             this.Respuesta5.Location = new System.Drawing.Point(97, 177);
             this.Respuesta5.Name = "Respuesta5";
-            this.Respuesta5.Size = new System.Drawing.Size(58, 34);
+            this.Respuesta5.Size = new System.Drawing.Size(75, 34);
             this.Respuesta5.TabIndex = 71;
             this.Respuesta5.TabStop = false;
             this.Respuesta5.Click += new System.EventHandler(this.Respuesta5_Click);
@@ -824,18 +824,18 @@
             // Respuesta2
             // 
             this.Respuesta2.BackColor = System.Drawing.Color.LawnGreen;
-            this.Respuesta2.Location = new System.Drawing.Point(634, 496);
+            this.Respuesta2.Location = new System.Drawing.Point(605, 495);
             this.Respuesta2.Name = "Respuesta2";
-            this.Respuesta2.Size = new System.Drawing.Size(57, 34);
+            this.Respuesta2.Size = new System.Drawing.Size(86, 35);
             this.Respuesta2.TabIndex = 12;
             this.Respuesta2.TabStop = false;
             // 
             // Respuesta3
             // 
             this.Respuesta3.BackColor = System.Drawing.Color.LawnGreen;
-            this.Respuesta3.Location = new System.Drawing.Point(362, 177);
+            this.Respuesta3.Location = new System.Drawing.Point(345, 177);
             this.Respuesta3.Name = "Respuesta3";
-            this.Respuesta3.Size = new System.Drawing.Size(58, 34);
+            this.Respuesta3.Size = new System.Drawing.Size(75, 34);
             this.Respuesta3.TabIndex = 11;
             this.Respuesta3.TabStop = false;
             this.Respuesta3.Click += new System.EventHandler(this.Respuesta3_Click);
@@ -843,9 +843,9 @@
             // Respuesta4
             // 
             this.Respuesta4.BackColor = System.Drawing.Color.LawnGreen;
-            this.Respuesta4.Location = new System.Drawing.Point(130, 495);
+            this.Respuesta4.Location = new System.Drawing.Point(122, 495);
             this.Respuesta4.Name = "Respuesta4";
-            this.Respuesta4.Size = new System.Drawing.Size(68, 34);
+            this.Respuesta4.Size = new System.Drawing.Size(76, 34);
             this.Respuesta4.TabIndex = 10;
             this.Respuesta4.TabStop = false;
             // 

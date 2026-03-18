@@ -49,6 +49,7 @@
             this.txtname.Name = "txtname";
             this.txtname.Size = new System.Drawing.Size(269, 22);
             this.txtname.TabIndex = 1;
+            this.txtname.Text = "Name...";
             // 
             // btnStart
             // 
